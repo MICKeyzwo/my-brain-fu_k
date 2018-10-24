@@ -1,9 +1,12 @@
 (_ => {
+
   "use strict";
+
+  const {getel, getels, on} = DOMUtl();
 
   //タイトルの治安を悪くするやつ
   {
-    const title = document.querySelector("h1");
+    const title = getel("h1");
     const randomInt = max => (Math.random() * max) | 0;
     const colorTimer = setInterval(_ => {
       const colors = [randomInt(256), randomInt(256), randomInt(256)];
@@ -11,9 +14,11 @@
     }, 1000 / 30);
   }
 
+  const condElms = [...getels("[name='commands']")];
+  const resultElm = getel("#result");
+
   //検索クエリを確認，値が設定されていればそれを反映させる
   {
-    const condElms = [...document.getElementsByName("commands")];
     location.search && decodeURIComponent(location.search)
       .replace("?", "")
       .split("&")
@@ -27,12 +32,10 @@
 
   //コマンド群のバリデーション，重複を検知してスタイルの適用などを行う
   const validateCommands = _ => {
-    const condElms = [...document.getElementsByName("commands")];
     condElms.forEach(elm => {
       elm.className = "form-control";
     });
     const cmds = condElms.map(elm => elm.value.trim());
-    const resultElm = document.getElementById("result");
     const errIdx = [];
     for (let i = 0; i < cmds.length; i++) {
       if (cmds[i] == "") {
@@ -60,22 +63,21 @@
   };
 
   //コマンド群の入力に際してのバリデーションの設定
-  [...document.getElementsByName("commands")].forEach(elm => {
-    elm.addEventListener("input", e => {
+  condElms.forEach(elm => {
+    on(elm, "input", e => {
       validateCommands();
     });
   });
 
   //brain fu*kの本体
-  document.getElementById("run").addEventListener("click", _ => {
+  on(getel("#run"), "click", _ => {
 
     if (!validateCommands()) return;
-    const rawCode = document.getElementById("code").value;
-    const rawInput = document.getElementById("input").value;
-    const resultElm = document.getElementById("result");
+    const rawCode = getel("#code").value;
+    const rawInput = getel("#input").value;
     resultElm.className = "";
     resultElm.textContent = "";
-    const rawCond = [...document.getElementsByName("commands")].map(elm => elm.value.trim());
+    const rawCond = condElms.map(elm => elm.value.trim());
     const cond = [">", "<", "+", "-", ",", ".", "[", "]"];
     const code = [];
     let compTmp = "";
@@ -110,30 +112,30 @@
   });
 
   //Hello Worldの自動生成機能
-  document.getElementById("hello").addEventListener("click", _ => {
+  on(getel("#hello"), "click", _ => {
     if (!validateCommands()) return;
     const helloWorld = `+++++++++[>++++++++>+++++++++++>+++++<<<-]>.>++.+++++++..+++.>-.------------.<++++++++.--------.+++.------.--------.>+.`;
-    const rawCond = [...document.getElementsByName("commands")].map(elm => elm.value.trim());
+    const rawCond = condElms.map(elm => elm.value.trim());
     const cond = [">", "<", "+", "-", ",", ".", "[", "]"];
     let res = "";
     [...helloWorld].forEach((c, idx) => {
       res += rawCond[cond.indexOf(c)];
     });
-    document.getElementById("code").value = res;
+    getel("#code").value = res;
   });
 
   //リンクジェネレータ，オレオレBrain Fu*kのリンクを生成してみんなで遊ぼう！！
-  document.getElementById("make-link").addEventListener("click", _ => {
+  on(getel("#make-link"), "click", _ => {
     if (!validateCommands()) return;
     let addr = document.location + "";
     const queryPos = addr.indexOf("?");
     if (queryPos != -1) addr = addr.substr(0, queryPos);
     addr += "?";
     let query = "";
-    [...document.getElementsByName("commands")].forEach((elm, idx) => {
+    condElms.forEach((elm, idx) => {
       query += (idx != 0 ? "&" : "") + idx + "=" + elm.value;
     });
-    document.getElementById("result").textContent = addr + encodeURIComponent(query);
+    resultElm.textContent = addr + encodeURIComponent(query);
 });
 
 })()
