@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 12pt;
+}
+
+html {
+  background: #ccc;
+}
+
+.app {
+  background: #ccc;
+  width: 100vw;
+}
+
+.main {
+  background: white;
+  border-radius: 5px;
+  margin: 20px auto;
+  padding: 10px 30px;
+  width: 90%;
+}
+
+.row-1 {
+  width: 25%;
+}
+
+.row-2 {
+  width: 75%;
+}
+
+td {
+  text-align: center;
+}
+
+td > input {
+  width: 95%;
+}
+
+.btn-wrap {
+  margin-bottom: 20px;
+}
+
+#result {
+  text-align: left;
+}
+
+.warn-text {
+  color: red;
+  font-size: 110%;
+  font-weight: bolder;
+}

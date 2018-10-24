@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Brain Fu*k!!!</title>
+    <link rel="stylesheet" href="./master.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="app">
+      <div class="main">
+
+        <h1>My Brain Fu*k!!!</h1>
+        <p>
+          Let's create your own †Brain Fu*k†
+        </p>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="row-1 text-center">Brain Fu*k</th>
+              <th class="row-2 text-center">Your Command</th>
+            </tr>
+          </thead>
+          <tr>
+            <td><code>></code></td>
+            <td><input type="text" name="commands" value=">" class="form-control"></td>
+          </tr>
+          <tr>
+            <td><code><</code></td>
+            <td><input type="text" name="commands" value="<" class="form-control"></td>
+          </tr>
+          <tr>
+            <td><code>+</code></td>
+            <td><input type="text" name="commands" value="+" class="form-control"></td>
+          </tr>
+          <tr>
+            <td><code>-</code></td>
+            <td><input type="text" name="commands" value="-" class="form-control"></td>
+          </tr>
+          <tr>
+            <td><code>,</code></td>
+            <td><input type="text" name="commands" value="," class="form-control"></td>
+          </tr>
+          <tr>
+            <td><code>.</code></td>
+            <td><input type="text" name="commands" value="." class="form-control"></td>
+          </tr>
+          <tr>
+            <td><code>[</code></td>
+            <td><input type="text" name="commands" value="[" class="form-control"></td>
+          </tr>
+          <tr>
+            <td><code>]</code></td>
+            <td><input type="text" name="commands" value="]" class="form-control"></td>
+          </tr>
+        </table>
+
+        <table class="table table-bordered">
+          <tr>
+            <td class="row-1"><b>code</b></td>
+            <td class="row-2"><textarea class="form-control" rows="5" id="code"></textarea></td>
+          </tr>
+          <tr>
+            <td><b>input value</b></td>
+            <td><input type="text" class="form-control" id="input"></td>
+          </tr>
+        </table>
+
+        <div class="btn-wrap">
+          <button type="button" class="btn btn-outline-primary" id="run">Run!</button>
+          <button type="button" class="btn btn-outline-primary" id="hello">Generate Hello, world!</button>
+          <button type="button" class="btn btn-outline-primary" id="make-link">Generate Link!</button>
+        </div>
+
+        <table class="table table-bordered">
+          <tr>
+            <td class="row-1"><b>result</b></td>
+            <td class="row-2">
+              <div id="result">
+              </div>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+
+    <script type="text/javascript" src="./main.js"></script>
+
+  </body>
+</html>
