@@ -115,10 +115,9 @@
     const helloWorld = `+++++++++[>++++++++>+++++++++++>+++++<<<-]>.>++.+++++++..+++.>-.------------.<++++++++.--------.+++.------.--------.>+.`;
     const rawCond = [...document.getElementsByName("commands")].map(elm => elm.value.trim());
     const cond = [">", "<", "+", "-", ",", ".", "[", "]"];
-    let res = helloWorld;
-    cond.forEach((c, idx) => {
-      const reg = new RegExp((idx > 1 ? "\\" : "") + c, "g");
-      res = res.replace(reg, rawCond[idx]);
+    let res = "";
+    [...helloWorld].forEach((c, idx) => {
+      res += rawCond[cond.indexOf(c)];
     });
     document.getElementById("code").value = res;
   });
