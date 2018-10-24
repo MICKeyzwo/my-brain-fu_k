@@ -130,10 +130,11 @@
     const queryPos = addr.indexOf("?");
     if (queryPos != -1) addr = addr.substr(0, queryPos);
     addr += "?";
+    let query = "";
     [...document.getElementsByName("commands")].forEach((elm, idx) => {
-      addr += (idx != 0 ? "&" : "") + idx + "=" + elm.value;
+      query += (idx != 0 ? "&" : "") + idx + "=" + elm.value;
     });
-    document.getElementById("result").textContent = addr;
+    document.getElementById("result").textContent = addr + encodeURIComponent(query);
 });
 
 })()
