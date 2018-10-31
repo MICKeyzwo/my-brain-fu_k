@@ -97,14 +97,16 @@
     let output = "";
     while (progPtr < code.length) {
       const token = code[progPtr];
-      if (token == ">") memoPtr++;
-      else if (token == "<") memoPtr--;
-      else if (token == "+") memo[memoPtr]++;
-      else if (token == "-") memo[memoPtr]--;
-      else if (token == ",") memo[memoPtr] = rawInput.charCodeAt(inptPtr++);
-      else if (token == ".") output += String.fromCharCode(memo[memoPtr]);
-      else if (token == "[") progPtr = memo[memoPtr] == 0 ? code.indexOf("]", progPtr) : progPtr;
-      else if (token == "]") progPtr = code.lastIndexOf("[", progPtr) - 1;
+      switch (token) {
+        case ">" : memoPtr++; break;
+        case "<" : memoPtr--; break;
+        case "+" : memo[memoPtr]++; break;
+        case "-" : memo[memoPtr]--; break;
+        case "," : memo[memoPtr] = rawInput.charCodeAt(inptPtr++); break;
+        case "." : output += String.fromCharCode(memo[memoPtr]); break;
+        case "[" : memo[memoPtr] == 0 && (progPtr = code.indexOf("]", progPtr)); break;
+        case "]" : progPtr = code.lastIndexOf("[", progPtr) - 1; break;
+      }
       progPtr++;
     }
     resultElm.textContent = output;
@@ -136,6 +138,6 @@
       query += (idx != 0 ? "&" : "") + idx + "=" + elm.value;
     });
     resultElm.textContent = addr + encodeURIComponent(query);
-});
+  });
 
 })()
